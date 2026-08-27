@@ -132,16 +132,14 @@ messages that carry a text prefix rather than relying on color alone.
 `.github/workflows/deploy.yml` builds and publishes `dist/` on every push to
 `main`. To enable it:
 
-1. **Settings → Secrets and variables → Actions → Variables** — add a repository
+1. **Settings → Pages → Build and deployment → Source: GitHub Actions.** This
+   step has to be done by hand once: the workflow's `GITHUB_TOKEN` cannot create
+   the Pages site itself (the API rejects it with "Resource not accessible by
+   integration"), so the first deploy fails until Pages exists.
+2. **Settings → Secrets and variables → Actions → Variables** — add a repository
    variable named `VITE_API_BASE_URL` pointing at your KeyPass API. It is baked
    into the bundle at build time, so use a URL, never a token.
-2. Push to `main` (or run the workflow manually from the Actions tab).
-
-The workflow passes `enablement: true` to `actions/configure-pages`, so the first
-run creates the Pages site and sets its source to GitHub Actions on its own. If
-that step still fails — some org policies block it — turn Pages on by hand at
-**Settings → Pages → Build and deployment → Source: GitHub Actions** and re-run
-the workflow.
+3. Push to `main`, or re-run the workflow from the Actions tab.
 
 The site is published at `https://<owner>.github.io/<repo>/`; the workflow sets
 `VITE_BASE_PATH` to `/<repo>/` so asset URLs resolve under that sub-path.
