@@ -1,0 +1,17 @@
+node_modules
+dist
+dist-ssr
+.vite
+*.local
+
+# Never commit real environment files - they may contain tokens or secrets.
+.env
+.env.*
+!.env.example
+
+.DS_Store
+*.log
+npm-debug.log*
+.idea
+.vscode/*
+!.vscode/extensions.json
